@@ -1,0 +1,44 @@
+
+# Include your Analyser configuration fhicl
+#include "services_dune.fcl"
+#include "MyAnalysis.fcl"
+
+process_name: RunMyAnalysis  #Name this process (Must not include any underscores)
+
+source:
+{
+    module_type: RootInput #Telling art we ant a ROOT input
+    maxEvents:   -1
+}
+
+## DUNE FD geometry ##
+# services: 
+# {
+#     @table::dunefd_services   
+#     TFileService: {fileName: "MyAnalysis.root"} # Output filename
+#     TimeTracker:  {}
+#     FileCatalogMetadata: @local::art_file_catalog_mc
+#     Geometry:            @local::dune10kt_1x2x6_geo 
+#                          @table::dunefd_1x2x6_simulation_services
+# } 
+
+# ProtoDUNE I geometry ##
+services: 
+{
+    TFileService: {fileName: "MyAnalysis.root"} # Output filename
+    TimeTracker:  {}
+    FileCatalogMetadata: @local::art_file_catalog_mc
+    Geometry:            @local::protodunev7_geo 
+                         @table::protodune_services 
+} 
+
+
+physics: 
+{   
+    analyzers: 
+    { 
+        myanalysis: @local::my_analysis 
+    }   
+    ana: [ myanalysis ]   #myanalysis will be taken as the directory name inside the root file
+    end_paths: [ ana ] # ana inserts into workflow, matches name in config fcl; @local:: matches the name in configuration fcl file
+}
