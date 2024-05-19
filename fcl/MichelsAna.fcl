@@ -1,0 +1,68 @@
+##################################################################################################
+# Configuration fcl file fot the MichelAna_module.cc
+# Expected input of the form:
+# Infomation related with the outputs of the module
+#  - TreesToRead: [["Gen"], ["Cry"], ["Reco"]]
+#  - ProductToDump: ["MODULE LABEL", "INSTANCE NAME", "PRODUCT TYPE", "OUTPUT TREE NAME"]
+# Information related with the cuts
+#  - FidVolCut: YourCut (float)
+#  - MuonTrackLengthCut: YourCut (float)
+#  - MuonMinHitPeakCut: YourCut (float) // 200
+#  - MuonMaxHitPeakCut: YourCut (float) // 5800
+#  - HitsDistance: YourCut [cm] (float) // 10
+#  - MinHitCountMichel: YourCut (int) // 5
+#  - MaxHitCountMichel: YourCut (int) // 40
+#  - ShowerDistance: YourCut [cm] (int) // 10
+#  - DistHitEnd: YourCut [cm] (float) // 80
+#  - AngleHitEnd: YourCut [rad] (float) // 0.523599
+#  - ConeLength: YourCut [cm] (float) // 15
+#  - ConeAngle: YourCut [deg] (float) // 60
+# Information related with theconfiguration
+#  - DetectorGeoemtry: "protodune" or "dune" (string) TODO
+#  - RollUpUnsavedIDs: "true" or "false" (string)
+#  - debug: "true" or "false" (string)
+##################################################################################################
+
+BEGIN_PROLOG
+
+michelsntuple : #Your chosen name for this parameter set 
+{
+  module_type  :      "MichelsAna" #Links the fhicl file to the analysis module using the name you gave your analyzer class
+  TreesToWrite: [["Gen"], ["Cry"], ["AllReco"], ["CutReco"]]
+
+  ### ProtoDUNE-SP ###
+    ProductsToDump: [
+                    ["generator",       "",         "simb::MCTruth",     "Gen_MCTruth"],     # GENIE:   Montecarlo truth info from Generator Stage (particle PDG, original positions... etc)
+                    ["cosmicgenerator", "",         "simb::MCTruth",     "Cry_MCTruth"],     # CRY: Montecarlo truth info from Cosmic Ray Generation
+                    # ["tpcrawdecoder",   "simpleSC", "sim::SimChannel",   "SimDetSim"],     # DetSim:
+                    ["pandora",         "",         "recob::PFParticle", "Reco_PFP"],        # Reco
+                    ["pandoraTrack",    "",         "recob::Track",      "Reco_Track"],      # Reco
+                    ["pandoraShower",   "",         "recob::Shower",     "Reco_Shower"],     # Reco
+                    ["hitpdune",        "",         "recob::Hit",        "Reco_Hit"],        # Reco
+                    ["pandora",         "",         "recob::Cluster",    "Reco_Cluster"],    # Reco
+                    ["pandora",         "",         "recob::SpacePoint", "Reco_SpacePoint"], # Reco
+                    ["opflash",         "",         "recob::OpFlash",    "Reco_OpFlash"]     # Reco
+                  ]
+
+  ## Add here the cutting values to update without compiling
+  FidVolCut: 5.0          #
+  CNNThreshold: 0.9       # [0,1] to select cnn_output > CNNThreshold
+  RadiusThreshold: 500.0  # [cm] Radius for hits in event selection //8
+  CloseHitsThreshold: 8   # [] Selection threshold for number of close hits 
+  MuonTrackLengthCut: 75  # [cm]
+  MuonMinHitPeakCut: 200  # [ADC]
+  MuonMaxHitPeakCut: 5800 # [ADC]
+  HitsDistance: 10        # [cm]
+  MinHitCountMichel: 5    #
+  MaxHitCountMichel: 40   #
+  ShowerDistance: 10      #[cm] (int)
+  DistHitEnd: 80          #[cm]
+  AngleHitEnd: 0.523599   #[rad]
+  ConeLength: 15          #[cm]
+  ConeAngle: 60           #[deg]
+    
+  RollUpUnsavedIDs:	"true" 
+  debug:            "true"
+}
+
+END_PROLOG

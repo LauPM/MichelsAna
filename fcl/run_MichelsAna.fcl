@@ -1,9 +1,9 @@
 
 # Include your Analyser configuration fhicl
 #include "services_dune.fcl"
-#include "MyAnalysis.fcl"
+#include "MichelsAna.fcl"
 
-process_name: RunMyAnalysis  #Name this process (Must not include any underscores)
+process_name: MichelsAnalysis  #Name this process (Must not include any underscores)
 
 source:
 {
@@ -25,7 +25,7 @@ source:
 # ProtoDUNE I geometry ##
 services: 
 {
-    TFileService: {fileName: "MyAnalysis.root"} # Output filename
+    TFileService: {fileName: "MichelsNTuple.root"} # Output filename
     TimeTracker:  {}
     FileCatalogMetadata: @local::art_file_catalog_mc
     Geometry:            @local::protodunev7_geo 
@@ -37,8 +37,8 @@ physics:
 {   
     analyzers: 
     { 
-        myanalysis: @local::my_analysis 
+        michelsntuple: @local::michelsntuple 
     }   
-    ana: [ myanalysis ]   #myanalysis will be taken as the directory name inside the root file
-    end_paths: [ ana ] # ana inserts into workflow, matches name in config fcl; @local:: matches the name in configuration fcl file
+    ana: [ michelsntuple ] #michels_ana will be taken as the directory name inside the root file
+    end_paths: [ ana ]   #ana inserts into workflow, matches name in config fcl; @local:: matches the name in configuration fcl file
 }
