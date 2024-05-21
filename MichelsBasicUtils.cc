@@ -65,7 +65,8 @@ namespace michels
     data.endPosY = particle->EndY();
     data.endPosZ = particle->EndZ();
     data.endPosT = particle->EndT();
-    data.Energy  = particle->E();
+    data.iniEne  = particle->E();
+    data.endEne  = particle->EndE();
     data.Moment  = particle->P(); //std::sqrt(std::pow(Momentum(i).E(),2.) - std::pow(fmass,2.)
     data.iniMomX = particle->Px();
     data.iniMomY = particle->Py();
@@ -73,7 +74,6 @@ namespace michels
     data.endMomX = particle->EndPx();
     data.endMomY = particle->EndPy();
     data.endMomZ = particle->EndPz();
-
                 
     return data;
   }

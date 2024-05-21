@@ -41,7 +41,9 @@ michelsntuple : #Your chosen name for this parameter set
                     ["hitpdune",        "",         "recob::Hit",        "Reco_Hit"],        # Reco
                     ["pandora",         "",         "recob::Cluster",    "Reco_Cluster"],    # Reco
                     ["pandora",         "",         "recob::SpacePoint", "Reco_SpacePoint"], # Reco
-                    ["opflash",         "",         "recob::OpFlash",    "Reco_OpFlash"]     # Reco
+                    ["opflash",         "",         "recob::OpFlash",    "Reco_OpFlash"],    # Reco
+                    ["caldata",         "dataprep", "recob::Wire",       "Reco_Wire"]        # Reco
+                    # ["digitwire", "", "", ""]
                   ]
 
   ## Add here the cutting values to update without compiling
@@ -50,6 +52,7 @@ michelsntuple : #Your chosen name for this parameter set
   RadiusThreshold: 500.0  # [cm] Radius for hits in event selection //8
   CloseHitsThreshold: 8   # [] Selection threshold for number of close hits 
   MuonTrackLengthCut: 75  # [cm]
+  MuonTrackLengthHitsCut: 10  # [cm]
   MuonMinHitPeakCut: 200  # [ADC]
   MuonMaxHitPeakCut: 5800 # [ADC]
   HitsDistance: 10        # [cm]

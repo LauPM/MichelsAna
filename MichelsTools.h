@@ -85,7 +85,7 @@ struct ParticleData
 {
   double iniPosX = -999, iniPosY = -999, iniPosZ = -999, iniPosT = -999;
   double endPosX = -999, endPosY = -999, endPosZ = -999, endPosT = -999;
-  double Energy  = -999, Moment  = -999;
+  double iniEne  = -999, endEne  = -999, Moment  = -999;
   double iniMomX = -999, iniMomY = -999, iniMomZ = -999;
   double endMomX = -999, endMomY = -999, endMomZ = -999;
   int PdgCode = -999, TrackId = -999, MumTID = -999;
@@ -103,6 +103,55 @@ struct FilteredOutput
   // ParticleData endPart;
   // std::string Type = "None";
 }; 
+
+struct Hit {
+    int key;
+    int wire;
+    int TPC;
+    int mult;
+    double peakT;
+    double charge;
+    double chno;
+    double xpos;
+    double ypos;
+    double zpos;
+    double sigptime;
+    double sigchrg;
+    double sigpamp;
+    double dof;
+    double gof;
+    double ptminusRMS;
+    double ptplusRMS;
+    double cnnMichel;
+    double cnnEM;
+    double cnnTrack;
+};
+
+struct Cone {
+    float key;
+    float charge;
+    float wire;
+    float tpc;
+    float ptime;
+    float xpos;
+    float ypos;
+    float zpos;
+    float angledeg;
+    float maghitveccostheta;
+    float distance;
+    float mult;
+    float sigptime;
+    float sigchrg;
+    float sigpamp;
+    float dof;
+    float gof;
+    float ptminusRMS;
+    float ptplusRMS;
+    float status;
+    float cnnMichel;
+    float cnnEM;
+    float cnnTrack;
+};
 
 namespace michels
 {
